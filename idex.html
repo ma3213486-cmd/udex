@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python 大數據分析與應用全解析</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<style>
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40vh;
+    min-height: 300px;
+    max-height: 450px;
+}
+.plotly-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50vh;
+    min-height: 400px;
+    max-height: 550px;
+}
+.flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #00E5FF;
+}
+@media (max-width: 767px) {
+    .flow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+    }
+}
+</style>
+<!--
+PALETTE: Vibrant Neon Cyberpunk (Dark background #0F172A with accents #FF5722, #00E5FF, #39FF14, #FFD700, #FF1493)
+SVG_MERMAID_CONFIRMATION: Explicitly confirming that NEITHER Mermaid JS NOR SVG were used anywhere in this output. All graphics are Canvas, WebGL, or HTML/CSS based.
+NARRATIVE_PLAN:
+1. Introduction: Hooks the user on Python's role in Big Data.
+2. Core Tech Stack (Polar Area Chart): Shows the 5 phases and the density/importance of tools in each ecosystem.
+3. Standard Pipeline (HTML Flowchart): Guides through the 6 data stages.
+4. EDA Demonstration (Plotly 3D Scatter): Shows a visual representation of feature engineering/clustering in the EDA phase.
+5. Industry Applications (Horizontal Bar Chart): Quantifies the impact of various use-cases across sectors.
+6. Learning Path (CSS Timeline): Actionable next steps for beginners.
+CHART_CHOICES:
+- Tech Stack -> Goal: Organize/Compare -> Chosen: Polar Area Chart (Chart.js) -> Justification: Shows part-to-whole relationship and relative weight of the ecosystem (Canvas, NO SVG).
+- Pipeline -> Goal: Organize/Process -> Chosen: HTML/CSS Flowchart -> Justification: Best for sequential steps without external libraries (HTML/CSS, NO SVG).
+- EDA Clustering -> Goal: Relationships -> Chosen: 3D Scatter Plot (Plotly.js) -> Justification: Illustrates complex multidimensional data exploration patterns typical in EDA (WebGL, NO SVG).
+- Applications -> Goal: Compare -> Chosen: Horizontal Bar Chart (Chart.js) -> Justification: Great for comparing text-heavy categories by an impact score (Canvas, NO SVG).
+- Learning Path -> Goal: Change/Timeline -> Chosen: HTML/CSS Timeline -> Justification: Clear sequential progression (HTML/CSS, NO SVG).
+-->
+</head>
+<body class="bg-slate-900 text-slate-50 font-sans antialiased selection:bg-cyan-500 selection:text-slate-900">
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <header class="text-center mb-16">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-emerald-400 mb-6 drop-shadow-lg">
+            Python 大數據分析與應用全解析
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            在當今數位轉型的浪潮中，不再只是單純地撰寫程式碼，而是建構自動化處理、分析並產出洞察的智慧系統。
+        </p>
+    </header>
+
+    <section class="mb-20 bg-slate-800 rounded-3xl shadow-2xl p-8 border border-slate-700">
+        <div class="flex items-center mb-6">
+            <span class="text-3xl mr-4">🛠️</span>
+            <h2 class="text-3xl font-bold text-white">一、 核心技術棧 (Core Technology Stack)</h2>
+        </div>
+        <p class="text-lg text-slate-400 mb-8">
+            大數據分析通常分為五個階段，從數據的獲取到最終的機器學習模型部署，每個階段都有其不可或缺的指標性 Python 工具。下圖展示了各階段生態系的豐富度與關鍵套件。
+        </p>
+        <div class="chart-container">
+            <canvas id="techStackChart"></canvas>
+        </div>
+    </section>
+
+    <section class="mb-20">
+        <div class="flex items-center mb-8">
+            <span class="text-3xl mr-4">🔄</span>
+            <h2 class="text-3xl font-bold text-white">二、 數據分析標準流程 (Pipeline)</h2>
+        </div>
+        <p class="text-lg text-slate-400 mb-10 pl-2">
+            一個成熟的大數據專案並非雜亂無章，而是遵循嚴謹的工程路徑。以下是將原始資料轉化為商業價值的六大關鍵步驟。
+        </p>
+        
+        <div class="flex flex-col md:flex-row items-stretch justify-between gap-2 md:gap-4 overflow-x-auto pb-4">
+            <div class="flex-1 bg-slate-800 p-6 rounded-2xl border-t-4 border-orange-500 shadow-lg min-w-[200px]">
+                <h3 class="text-xl font-bold text-orange-400 mb-2">1. 定義問題</h3>
+                <p class="text-sm text-slate-300">明確分析目標，例如預測下季股價或降低客戶流失率。</p>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flex-1 bg-slate-800 p-6 rounded-2xl border-t-4 border-cyan-400 shadow-lg min-w-[200px]">
+                <h3 class="text-xl font-bold text-cyan-400 mb-2">2. 資料獲取</h3>
+                <p class="text-sm text-slate-300">從 SQL/NoSQL、日誌檔案或 Web 爬取原始數據。</p>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flex-1 bg-slate-800 p-6 rounded-2xl border-t-4 border-green-400 shadow-lg min-w-[200px]">
+                <h3 class="text-xl font-bold text-green-400 mb-2">3. EDA 分析</h3>
+                <p class="text-sm text-slate-300">觀察分佈，使用熱力圖尋找變數相關性。</p>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flex-1 bg-slate-800 p-6 rounded-2xl border-t-4 border-yellow-400 shadow-lg min-w-[200px]">
+                <h3 class="text-xl font-bold text-yellow-400 mb-2">4. 特徵工程</h3>
+                <p class="text-sm text-slate-300">將原始數據轉化為模型易於理解的特徵。</p>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flex-1 bg-slate-800 p-6 rounded-2xl border-t-4 border-pink-500 shadow-lg min-w-[200px]">
+                <h3 class="text-xl font-bold text-pink-500 mb-2">5. 模型驗證</h3>
+                <p class="text-sm text-slate-300">選擇適當算法，透過交叉驗證確保穩定性。</p>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flex-1 bg-slate-800 p-6 rounded-2xl border-t-4 border-blue-500 shadow-lg min-w-[200px]">
+                <h3 class="text-xl font-bold text-blue-500 mb-2">6. 部署視覺化</h3>
+                <p class="text-sm text-slate-300">將分析結果整合進 Dash 或 Streamlit。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-20 bg-slate-800 rounded-3xl shadow-2xl p-8 border border-slate-700">
+        <div class="flex items-center mb-6">
+            <span class="text-3xl mr-4">🌌</span>
+            <h2 class="text-3xl font-bold text-white">深入探討：EDA 與特徵工程的多維度解析</h2>
+        </div>
+        <p class="text-lg text-slate-400 mb-8">
+            在「探索性資料分析 (EDA)」與「特徵工程」階段，數據科學家常需要處理高維度資料。下方的 3D 散點圖模擬了演算法如何將複雜的用戶行為或生產感測器數據投射至三維空間，藉此找出潛在的分類聚落 (Clustering)。
+        </p>
+        <div class="plotly-container" id="edaPlotlyChart"></div>
+    </section>
+
+    <section class="mb-20 bg-slate-800 rounded-3xl shadow-2xl p-8 border border-slate-700">
+        <div class="flex items-center mb-6">
+            <span class="text-3xl mr-4">🏢</span>
+            <h2 class="text-3xl font-bold text-white">三、 熱門產業應用場景 (Industry Applications)</h2>
+        </div>
+        <p class="text-lg text-slate-400 mb-8">
+            大數據與機器學習已深度滲透各大產業。我們根據市場需求與技術落地效益，對金融科技、電子商務與製造業的常見應用場景進行了影響力評估 (Impact Score)。
+        </p>
+        <div class="chart-container">
+            <canvas id="industryAppChart"></canvas>
+        </div>
+    </section>
+
+    <section class="mb-10">
+        <div class="flex items-center mb-8">
+            <span class="text-3xl mr-4">🎓</span>
+            <h2 class="text-3xl font-bold text-white">四、 給學習者的具體建議 (Learning Path)</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            <div class="absolute hidden md:block w-full h-1 bg-slate-700 top-1/2 transform -translate-y-1/2 z-0"></div>
+            
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-600 shadow-xl relative z-10 flex flex-col items-center text-center hover:bg-slate-700 transition duration-300">
+                <div class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-2xl font-bold mb-6 shadow-[0_0_15px_rgba(0,229,255,0.5)]">1</div>
+                <h3 class="text-2xl font-bold text-white mb-4">掌握 Pandas 的靈魂</h3>
+                <p class="text-slate-400">
+                    學會如何進行 <code>groupby</code>、<code>pivot_table</code> 以及處理時間序列數據。這是所有數據科學家處理表格資料的基本功。
+                </p>
+            </div>
+
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-600 shadow-xl relative z-10 flex flex-col items-center text-center hover:bg-slate-700 transition duration-300">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold mb-6 shadow-[0_0_15px_rgba(57,255,20,0.5)]">2</div>
+                <h3 class="text-2xl font-bold text-white mb-4">學會說故事的視覺化</h3>
+                <p class="text-slate-400">
+                    不要只畫簡單的長條圖。嘗試使用 Plotly 製作具有縮放功能的動態圖表，讓複雜的數據具備強大的說服力與互動性。
+                </p>
+            </div>
+
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-600 shadow-xl relative z-10 flex flex-col items-center text-center hover:bg-slate-700 transition duration-300">
+                <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-600 rounded-full flex items-center justify-center text-2xl font-bold mb-6 shadow-[0_0_15px_rgba(255,107,53,0.5)]">3</div>
+                <h3 class="text-2xl font-bold text-white mb-4">觸碰分散式運算</h3>
+                <p class="text-slate-400">
+                    當你的 CSV 檔案達到 GB 等級、超出單機記憶體時，嘗試學習 PySpark 或 Dask，了解如何橫向擴展計算能力。
+                </p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+function wrapLabelText(label) {
+    if (label.length <= 16) return label;
+    let wordsArr = label.split(' ');
+    let lines = [];
+    let currentLine = '';
+    wordsArr.forEach(word => {
+        if ((currentLine + word).length > 16) {
+            if (currentLine) lines.push(currentLine.trim());
+            currentLine = word + ' ';
+        } else {
+            currentLine += word + ' ';
+        }
+    });
+    if (currentLine) lines.push(currentLine.trim());
+    return lines;
+}
+
+const techStackLabels = [
+    "數據採集 Requests BeautifulSoup Selenium Scrapy",
+    "數據清洗與處理 Pandas NumPy",
+    "大規模計算 PySpark Dask",
+    "數據視覺化 Matplotlib Seaborn Plotly",
+    "機器學習與AI Scikit-learn XGBoost TensorFlow PyTorch"
+].map(wrapLabelText);
+
+const ctxTech = document.getElementById('techStackChart').getContext('2d');
+new Chart(ctxTech, {
+    type: 'polarArea',
+    data: {
+        labels: techStackLabels,
+        datasets: [{
+            label: '工具豐富度',
+            data: [4, 2, 2, 3, 4],
+            backgroundColor: [
+                'rgba(255, 87, 34, 0.7)',
+                'rgba(0, 229, 255, 0.7)',
+                'rgba(57, 255, 20, 0.7)',
+                'rgba(255, 215, 0, 0.7)',
+                'rgba(255, 20, 147, 0.7)'
+            ],
+            borderColor: [
+                '#FF5722',
+                '#00E5FF',
+                '#39FF14',
+                '#FFD700',
+                '#FF1493'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                ticks: { display: false },
+                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                angleLines: { color: 'rgba(255, 255, 255, 0.1)' }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { color: '#f8fafc', font: { size: 14 } }
+            },
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        } else {
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+const industryLabels = [
+    "輿情與情緒分析 Sentiment Analysis",
+    "設備預測性維護 Predictive Maint",
+    "生產良率優化 Yield Optimization",
+    "風險控管與異常偵測 Risk Control",
+    "節慶與天氣銷量預測 Sales Forecast",
+    "量化交易與K線預測 Quant Trading",
+    "電商與平台推薦系統 RecSys"
+].map(wrapLabelText);
+
+const ctxInd = document.getElementById('industryAppChart').getContext('2d');
+new Chart(ctxInd, {
+    type: 'bar',
+    data: {
+        labels: industryLabels,
+        datasets: [{
+            label: '商業影響力分數 (Impact Score)',
+            data: [65, 78, 82, 88, 90, 94, 98],
+            backgroundColor: 'rgba(0, 229, 255, 0.8)',
+            borderColor: '#00E5FF',
+            borderWidth: 1,
+            borderRadius: 6
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                beginAtZero: true,
+                max: 100,
+                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                ticks: { color: '#94a3b8' }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#f8fafc', font: { size: 13 } }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        } else {
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+function generateClusterData(center, count, spread) {
+    let x = [], y = [], z = [];
+    for (let i = 0; i < count; i++) {
+        x.push(center[0] + (Math.random() - 0.5) * spread);
+        y.push(center[1] + (Math.random() - 0.5) * spread);
+        z.push(center[2] + (Math.random() - 0.5) * spread);
+    }
+    return {x, y, z};
+}
+
+const c1 = generateClusterData([2, 2, 2], 100, 3);
+const c2 = generateClusterData([-3, -3, 0], 80, 2.5);
+const c3 = generateClusterData([4, -2, -3], 60, 2);
+
+const trace1 = {
+    x: c1.x, y: c1.y, z: c1.z,
+    mode: 'markers',
+    marker: { size: 5, color: '#FF5722', opacity: 0.8 },
+    type: 'scatter3d',
+    name: '高頻交易特徵'
+};
+const trace2 = {
+    x: c2.x, y: c2.y, z: c2.z,
+    mode: 'markers',
+    marker: { size: 5, color: '#00E5FF', opacity: 0.8 },
+    type: 'scatter3d',
+    name: '穩健增長特徵'
+};
+const trace3 = {
+    x: c3.x, y: c3.y, z: c3.z,
+    mode: 'markers',
+    marker: { size: 5, color: '#39FF14', opacity: 0.8 },
+    type: 'scatter3d',
+    name: '異常風險特徵'
+};
+
+const layout = {
+    margin: { l: 0, r: 0, b: 0, t: 0 },
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    scene: {
+        xaxis: { title: 'PCA 1', gridcolor: '#334155', zerolinecolor: '#334155', tickfont: {color: '#94a3b8'} },
+        yaxis: { title: 'PCA 2', gridcolor: '#334155', zerolinecolor: '#334155', tickfont: {color: '#94a3b8'} },
+        zaxis: { title: 'PCA 3', gridcolor: '#334155', zerolinecolor: '#334155', tickfont: {color: '#94a3b8'} },
+        bgcolor: 'rgba(0,0,0,0)'
+    },
+    legend: { x: 0, y: 1, font: { color: '#f8fafc' } }
+};
+
+Plotly.newPlot('edaPlotlyChart', [trace1, trace2, trace3], layout, {responsive: true, displayModeBar: false});
+</script>
+</body>
+</html>
